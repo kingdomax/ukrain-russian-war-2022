@@ -100,3 +100,11 @@ span.monospace {
 circle.blur {
   fill: #808080 !important;
 }
+
+section {
+  margin-bottom: 50px;
+}
+
+section:first-child {
+  text-align: center;
+}

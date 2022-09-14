@@ -2,8 +2,8 @@ import * as d3 from 'd3';
 
 // https://d3-graph-gallery.com/graph/custom_color.html
 const colorMap = [
-    { key: 'Russia', value: '#80b1d3', }, // Blue
-    { key: 'Ukraine', value: '#ffed6f', }, // Yellow
+    { key: 'Russia', value: '#fb8072', }, // Red
+    { key: 'Ukraine', value: '#80b1d3', }, // Blue
     
     { key: 'Air Equipments', value: '#fccde5', }, // Pink
     { key: 'Aircraft', value: '#fccde5', },
@@ -33,4 +33,4 @@ const colorMap = [
     { key: 'Towed Artillery', value: '#fdb462', },
 ];
 
-export const color = d3.scaleOrdinal().domain(colorMap.map(cm => cm.key)).range(colorMap.map(cm => cm.value));
+export const colorScale = d3.scaleOrdinal().domain(colorMap.map(cm => cm.key)).range(colorMap.map(cm => cm.value));

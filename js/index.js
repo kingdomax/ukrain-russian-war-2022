@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { buildHierarchicalData } from './dataProcessor';
+import { buildHierarchicalData, buildAccumulatedList } from './dataProcessor';
 import { renderSunburstChart } from './sequenceSunburst';
 import { renderBarChart } from './groupedBarChart';
 
@@ -11,5 +11,5 @@ renderSunburstChart(
 );
 renderBarChart(
     d3.select('svg#barchart'),
-    { },
+    buildAccumulatedList(russianData, ukrainianData),
 );

@@ -1,8 +1,4 @@
 export const buildHierarchicalData = (russianData, ukrainianData) => {    
-    
-    console.log('russianDataCsv', russianData);
-    console.log('ukrainianDataCsv', ukrainianData);
-
     const russianEquipment = {
         name: 'Russia',
         children: buildEquipmentCategories(russianData),
@@ -16,7 +12,6 @@ export const buildHierarchicalData = (russianData, ukrainianData) => {
 };
 
 const buildEquipmentCategories = (data) => {
-
     const accumulateEquipmentLoss = (equipment) => {
         return data.reduce((acc, d) => d.equipment === equipment ? acc + Number(d.losses_total) : acc, 0);
     };
@@ -65,4 +60,38 @@ const buildEquipmentCategories = (data) => {
     };
 
     return [airEquipments, groundEquipments, navalEquipments, otherEquipments];
+};
+
+export const buildAccumulatedList = (russianData, ukrainianData) => {
+    let russianEquipment = [];
+    buildEquipmentCategories(russianData).forEach(category => {
+        russianEquipment = [
+            ...russianEquipment,
+            ...category.children.map(each => {
+                return {
+                    name: each.name,
+                    country: 'Russia',
+                    category: category.name,
+                    value: each.value,
+                };
+            }),
+        ];
+    });
+
+    let ukrainianEquipment = [];
+    buildEquipmentCategories(ukrainianData).forEach(category => {
+        ukrainianEquipment = [
+            ...ukrainianEquipment,
+            ...category.children.map(each => {
+                return {
+                    name: each.name,
+                    country: 'Ukraine',
+                    category: category.name,
+                    value: each.value,
+                };
+            }),
+        ];
+    });
+
+    return [...russianEquipment, ...ukrainianEquipment];
 };

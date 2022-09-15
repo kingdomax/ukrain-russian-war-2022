@@ -9,16 +9,18 @@ const FONT = '10px sans-serif';
 const FONT_COLOR = '#888';
 
 export const renderSunburstChart = (svgBreadcrumb, svgSunburst, hierarchicalData) => {
-    // Define root node of hierarchy data
+    console.log('buildHierarchicalData', hierarchicalData);
+    
+    // Prepare root node of hierarchy data
     const hierarchy = d3.hierarchy(hierarchicalData).sum(d => d.value).sort((a, b) => b.value - a.value);
     const root = d3.partition().size([2 * Math.PI, RADIUS * RADIUS])(hierarchy);
     console.log('[SequenceSunburst] rootPartition', root);
 
     // Setup canvas
-    svgBreadcrumb.attr('viewBox', `0 0 ${BC_WIDTH * 5} ${BC_HEIGHT}`).style('font', FONT).style('margin-bottom', '20px');
-    svgSunburst.attr('viewBox', `${-RADIUS} ${-RADIUS} ${WIDTH} ${WIDTH}`).style('max-width', `${WIDTH}px`).style('font', FONT);
+    svgBreadcrumb.attr('viewBox', `0 0 ${BC_WIDTH * 5} ${BC_HEIGHT}`).attr('style', `font:${FONT}; margin-bottom:20px;`);
+    svgSunburst.attr('viewBox', `${-RADIUS} ${-RADIUS} ${WIDTH} ${WIDTH}`).attr('style', `font:${FONT}; max-width:${WIDTH}px;`);
 
-    // Prepare center label <text><tspan></tspan><tspan></tspan></text>
+    // Draw center label <text><tspan></tspan><tspan></tspan></text>
     const label = svgSunburst.append('text')
                     .attr('fill', FONT_COLOR)
                     .attr('text-anchor', 'middle')
@@ -29,6 +31,7 @@ export const renderSunburstChart = (svgBreadcrumb, svgSunburst, hierarchicalData
             .attr('y', 0)
             .attr('dy', '-0.1em')
             .attr('font-size', '4em')
+            .attr('font-weight', 'bold')
             .text('');
     label.append('tspan')
             .attr('class', 'equipment')
@@ -36,6 +39,7 @@ export const renderSunburstChart = (svgBreadcrumb, svgSunburst, hierarchicalData
             .attr('y', 0)
             .attr('dy', '2em')
             .attr('font-size', '1.5em')
+            .attr('font-weight', 'bold')
             .text('');
 
     // Draw arc icicle

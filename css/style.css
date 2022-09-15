@@ -108,3 +108,24 @@ section {
 section:first-child {
   text-align: center;
 }
+
+/* Bar Chart Section*/
+.barchart-header {
+  margin-bottom: 20px;
+}
+.barchart-header div {
+  font-size: 12px;
+  display: inline-block;
+}
+
+.russia { background-color: #FADBD8; }
+.ukraine { background-color: #BADDF1;}
+.color-legend {
+  width: 24px;
+  height: 24px;
+  margin-bottom: -7px;
+}
+.text-legend {
+  font-weight: bold;
+  margin-right: 5px;
+}

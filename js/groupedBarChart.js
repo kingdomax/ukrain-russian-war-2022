@@ -28,8 +28,7 @@ const reRender = (svgBarchart, data) => {
     const X = data.map(d => d.name);  // equipments
     const Y = data.map(d => d.value); // equipmentCount
     const Z = data.map(d => d.country); // country
-    //const xDomain = ['Armoured Fighting Vehicles', 'Armoured Personnel Carriers', 'Infantry Fighting Vehicles', 'Infantry Mobility Vehicles', 'Tanks', 'Trucks, Vehicles and Jeeps'];
-    const xDomain = [...new Set(data.map(d => d.name))];
+    const xDomain = [...new Set(data.map(d => d.name))]; // ['Armoured Fighting Vehicles', 'Armoured Personnel Carriers', 'Infantry Fighting Vehicles', 'Infantry Mobility Vehicles', 'Tanks', 'Trucks, Vehicles and Jeeps']
     const yDomain = [0, d3.max(Y)];
     const zDomain = ['Ukraine', 'Russia'];
     const targetIndex = d3.range(X.length).filter(i => xDomain.includes(X[i])); // Omit index not present in xDomain

@@ -6,7 +6,7 @@ const WIDTH = RADIUS * 2;
 const BC_HEIGHT = 30;
 const BC_WIDTH = BC_HEIGHT * 4;
 const FONT = '10px sans-serif';
-const FONT_COLOR = '#888';
+const FONT_COLOR = 'white';
 
 export const renderSunburstChart = (svgBreadcrumb, svgSunburst, hierarchicalData) => {
     console.log('buildHierarchicalData', hierarchicalData);
@@ -18,7 +18,7 @@ export const renderSunburstChart = (svgBreadcrumb, svgSunburst, hierarchicalData
 
     // Setup canvas
     svgBreadcrumb.attr('viewBox', `0 0 ${BC_WIDTH * 5} ${BC_HEIGHT}`).attr('style', `font:${FONT}; margin-bottom:20px;`);
-    svgSunburst.attr('viewBox', `${-RADIUS} ${-RADIUS} ${WIDTH} ${WIDTH}`).attr('style', `font:${FONT}; max-width:${WIDTH}px;`);
+    svgSunburst.attr('viewBox', `${-RADIUS} ${-RADIUS} ${WIDTH} ${WIDTH}`).attr('style', `font:${FONT}; max-width:${WIDTH}px; margin:0 0 20px 150px;`);
 
     // Draw center label <text><tspan></tspan><tspan></tspan></text>
     const label = svgSunburst.append('text')

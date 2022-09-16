@@ -3,6 +3,8 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
+  background-color: #26232C;
+  color: white;
 }
 
 main {
@@ -30,15 +32,15 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
-  font-weight: 400;
-  margin: 2rem 0 1rem 0;
+  font-size: 3rem;
+  margin: 2rem 0 0 0;
+  font-weight: bold;
 }
 
 h3 {
   font-size: 2rem;
   font-weight: 400;
-  margin: 1rem 0 1rem 0;
+  margin: 0 0 1rem 0;
 }
 
 table {
@@ -102,11 +104,17 @@ circle.blur {
 }
 
 section {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  border: 1px solid #fff6;
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
+/* 1st section */
 section:first-child {
-  text-align: center;
+  font-size: 1rem;
+  border: none;
+  padding: 0;
 }
 
 /* Bar Chart Section*/

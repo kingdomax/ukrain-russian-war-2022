@@ -11,5 +11,6 @@ renderSunburstChart(
 );
 renderBarChart(
     d3.select('svg#barchart'),
+    d3.select('#selection'),
     buildAccumulatedList(russianData, ukrainianData),
 );

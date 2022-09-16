@@ -117,6 +117,10 @@ section:first-child {
   font-size: 12px;
   display: inline-block;
 }
+.barchart-header .select-box {
+  display: block;  
+  margin-bottom: 10px;
+}
 
 .russia { background-color: #FADBD8; }
 .ukraine { background-color: #BADDF1;}

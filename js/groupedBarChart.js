@@ -5,17 +5,32 @@ const WIDTH = 1152;
 const HEIGHT = 500;
 const MARGIN = { top: 30, right: 0, bottom: 30, left: 40 };
 
-export const renderBarChart = (svgBarchart, data) => {
+export const renderBarChart = (svgBarchart, svgSelectBox, data) => {
     console.log('buildAccumulatedList', data);
-    
+
+    // Setup canvas
+    svgBarchart.attr('viewBox', [0, 0, WIDTH, HEIGHT])
+                .attr('width', WIDTH)
+                .attr('height', HEIGHT)
+                .attr('style', `max-width: 100%; height: auto; height: intrinsic;`);
+
+    // Initial render
+    reRender(svgBarchart, data.filter(d => d.category == 'Ground Equipments'));
+
+    // Select box event
+    svgSelectBox.on('change', (event) => {
+        reRender(svgBarchart, data.filter(d => d.category == event.target.value));
+    });
+};
+
+const reRender = (svgBarchart, data) => {
     // Prepare data
     const X = data.map(d => d.name);  // equipments
     const Y = data.map(d => d.value); // equipmentCount
     const Z = data.map(d => d.country); // country
-    //const xDomain = ['Armoured Fighting Vehicles', 'Armoured Personnel Carriers', 'Infantry Fighting Vehicles', 'Infantry Mobility Vehicles', 'Tanks', 'Trucks, Vehicles and Jeeps']; // todo-moch: remove hardcode
-    const xDomain = ['Command Posts And Communications Stations', 'Jammers And Deception Systems', 'Mine-Resistant Ambush Protected', 'Multiple Rocket Launchers', 'Self-Propelled Anti-Aircraft Guns', 'Self-Propelled Anti-Tank Missile Systems', 'Self-Propelled Artillery', 'Surface-To-Air Missile Systems', 'Towed Artillery']; // todo-moch: remove hardcode
-    //const yDomain = [0, d3.max(Y)]; // todo-moch: need to be max of xDomain
-    const yDomain = [0, 165];
+    //const xDomain = ['Armoured Fighting Vehicles', 'Armoured Personnel Carriers', 'Infantry Fighting Vehicles', 'Infantry Mobility Vehicles', 'Tanks', 'Trucks, Vehicles and Jeeps'];
+    const xDomain = [...new Set(data.map(d => d.name))];
+    const yDomain = [0, d3.max(Y)];
     const zDomain = ['Ukraine', 'Russia'];
     const targetIndex = d3.range(X.length).filter(i => xDomain.includes(X[i])); // Omit index not present in xDomain
 
@@ -25,18 +40,15 @@ export const renderBarChart = (svgBarchart, data) => {
     const yScale = d3.scaleLinear(yDomain, [HEIGHT - MARGIN.bottom, MARGIN.top]);
     const zScale = colorScale;
 
-    // Setup canvas
-    svgBarchart.attr('viewBox', [0, 0, WIDTH, HEIGHT])
-                .attr('width', WIDTH)
-                .attr('height', HEIGHT)
-                .attr('style', `max-width: 100%; height: auto; height: intrinsic;`);
+    // Make sure there are no previous elemment in svg
+    svgBarchart.selectAll('*').remove();
 
     // Draw X axis
     svgBarchart.append('g')
                 .attr('font-weight', 'bold')
                 .attr('transform', `translate(0,${HEIGHT - MARGIN.bottom})`)
                 .call(d3.axisBottom(xScale).tickSizeOuter(0))
-                .call(g => g.selectAll('.tick text').text(t => t.length > 20 ? `${t.slice(0,19)}...` : t)); // todo-moch: only other equipments + all
+                .call(g => g.selectAll('.tick text').text(t => t.length > 20 ? `${t.slice(0,19)}...` : t));
     
     // Draw Y axis
     svgBarchart.append('g') 

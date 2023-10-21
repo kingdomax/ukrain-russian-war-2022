@@ -16,6 +16,8 @@ Wait until all dependencies are installed, then run the command below again.
 ### Run
 Snowpack framework should start the local server on default port 8080 and automatically launch the browser tab with http://localhost:8080/.
 
+![image](https://github.com/kingdomax/ukrain-russian-war-2022/assets/6430428/8c8c1753-0fa3-4b99-8711-ac8234dead1d)
+
 
 ## Authors
   - [Pramoch Viriyathomrongul](https://github.com/kingdomax/ukrain-russian-war-2022)
